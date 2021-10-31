@@ -1,24 +1,31 @@
+#include <string>
+
 #include <SFML/Graphics.hpp>
 
-int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+#include "BaseScene.h"
+#include "Scene.h"
 
-    while (window.isOpen())
+int main()
+{    
+    Scene scene{ 500, 500, "SFML Static" };
+
+    sf::Clock clock;
+    while (scene.getWindow().isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (scene.getWindow().pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+                scene.getWindow().close();
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+        sf::Time elapsed = clock.restart();
+
+        scene.getWindow().clear();        
+        scene.update(elapsed.asSeconds());
+        scene.draw(elapsed.asSeconds());
+        scene.getWindow().display();
     }
 
-	return 0;
+	return EXIT_SUCCESS;
 }
