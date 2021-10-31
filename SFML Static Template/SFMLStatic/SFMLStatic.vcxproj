@@ -152,7 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="BaseScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="CourierPrime-Regular.ttf" />

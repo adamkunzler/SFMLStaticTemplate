@@ -7,7 +7,9 @@ protected:
 	int height{0};	
 	float halfWidth{ 0.0f };
 	float halfHeight{ 0.0f };
+	
 	sf::RenderWindow window;
+
 	sf::Text txtFps;
 	sf::Font font;
 	bool isFPS{ true };
