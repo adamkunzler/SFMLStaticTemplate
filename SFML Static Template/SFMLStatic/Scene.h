@@ -46,7 +46,7 @@ public:
 		for (size_t x = 0; x < noise.size(); x++)
 		{
 			index = x * 4;
-			int rgb = mapRange(noise.at(x), -1, 1, 0, 255);
+			int rgb = (int)mapRange(noise.at(x), -1, 1, 0, 255);
 			pixels[index] = rgb;
 			pixels[index + 1] = rgb;
 			pixels[index + 2] = rgb;
@@ -57,12 +57,6 @@ public:
 		sprite.setTexture(texture);
 
 		delete[] pixels;
-	}
-
-	int mapRange(float value, float minSource, float maxSource, float minTarget, float maxTarget)
-	{
-		//https://math.stackexchange.com/a/377174
-		return ((value - minSource) * ((maxTarget - minTarget) / (maxSource - minSource))) + minTarget;
 	}
 
 	void updateScene(float elapsed) override

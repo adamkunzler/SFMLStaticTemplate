@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{dbc18267-709b-4e1e-8a1f-2fa2512bfe81}</ProjectGuid>
-    <RootNamespace>SFMLStatic</RootNamespace>
+    <ProjectGuid>{d23f0b4f-89eb-465f-8842-7ef8351bbcf8}</ProjectGuid>
+    <RootNamespace>TestRandomGenerator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

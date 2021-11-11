@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <string>
+#include <algorithm>
 
 #include <FastNoise/FastNoise.h>
 
@@ -14,7 +14,7 @@
 
 int main()
 {    
-    Scene scene{ 1024, 1024, "SFML Static" };
+    Scene scene{ 1024, 1024, "RandomGenerator Tests" };
 
     sf::Clock clock;
     while (scene.getWindow().isOpen())
