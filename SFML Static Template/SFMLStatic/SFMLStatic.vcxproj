@@ -154,9 +154,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="CourierPrime-Regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="vendors\FastNoise2\include\FastNoise\FastNoise.h" />

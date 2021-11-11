@@ -1,4 +1,8 @@
+#include <iostream>
+#include <vector>
 #include <string>
+
+#include <FastNoise/FastNoise.h>
 
 #include <SFML/Graphics.hpp>
 

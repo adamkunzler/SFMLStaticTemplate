@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="CourierPrime-Regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="BaseScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
