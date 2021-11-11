@@ -23,7 +23,7 @@ public:
 	{
 		window.create(sf::VideoMode(width, height), title);	
 
-		if (font.loadFromFile("CourierPrime-Regular.ttf"))
+		if (font.loadFromFile("assets/CourierPrime-Regular.ttf"))
 		{
 			txtFps.setFont(font);
 			txtFps.setCharacterSize(18);
