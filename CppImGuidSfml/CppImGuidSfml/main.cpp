@@ -15,7 +15,6 @@
 #include "BaseScene.h"
 
 #include "TestScene.h"
-#include "StarFieldScene.h"
 
 void showInfoOverlay(const std::vector<std::string>&);
 
@@ -23,15 +22,21 @@ int main()
 {    
 	auto start = std::chrono::steady_clock::now();
 
-    //TestScene scene{ 1024, 1024, "SFML Static" };
-	StarFieldScene scene{ 2048, 2048, ".: SFML Star Field :." };
-
+    TestScene scene{ 1024, 1024, "SFML Static" };
+	
     ImGui::SFML::Init(scene.getWindow());
-	bool showImGuiDemo = false;
-    
-    sf::Clock clock;
+	    	
+    sf::Clock clock;	
+	sf::Time lag;
+
+	sf::Time MS_PER_UPDATE{ sf::milliseconds(1000.0 / 120.0) }; // Update at 120 FPS
+
     while (scene.getWindow().isOpen())
     {
+		sf::Time elapsed = clock.restart();
+		lag += elapsed;
+
+		// Process game input
         sf::Event event;
         while (scene.getWindow().pollEvent(event))
         {            
@@ -43,20 +48,21 @@ int main()
             scene.processEvents(event);
         }
 
-        sf::Time elapsed = clock.restart();
-        ImGui::SFML::Update(scene.getWindow(), elapsed);
-			
+		// Update
+		while (lag >= MS_PER_UPDATE)
+		{			
+			scene.update(MS_PER_UPDATE);
+			lag -= MS_PER_UPDATE;
+
+			// TODO - safeguard - bail out of loop after x iterations (game will slow, but won't get stuck)
+		}
+
+		// Render - imguid, infoOverlay, scene
+        ImGui::SFML::Update(scene.getWindow(), elapsed);			
 		showInfoOverlay(scene.getOverlayMessages());
-		scene.customImGui();
-		
-		if (showImGuiDemo)
-			ImGui::ShowDemoWindow(&showImGuiDemo);
-
-        scene.getWindow().clear();        
-        		
-        scene.update(elapsed.asSeconds());
-
-		scene.draw(elapsed.asSeconds());
+		scene.customImGui();				
+        scene.getWindow().clear();                	        
+		scene.draw(lag / MS_PER_UPDATE);
 
         ImGui::SFML::Render(scene.getWindow());
         scene.getWindow().display();		
@@ -64,6 +70,53 @@ int main()
 
     ImGui::SFML::Shutdown();
 	std::cerr << "\n\nElapsed(ms)=" << since(start).count() << std::endl;
+	return EXIT_SUCCESS;
+}
+
+int old_main_traditional_game_loop()
+{
+	/*auto start = std::chrono::steady_clock::now();
+
+	TestScene scene{ 1024, 1024, "SFML Static" };
+	
+	ImGui::SFML::Init(scene.getWindow());
+	bool showImGuiDemo = false;
+
+	sf::Clock clock;
+	while (scene.getWindow().isOpen())
+	{
+		sf::Event event;
+		while (scene.getWindow().pollEvent(event))
+		{
+			ImGui::SFML::ProcessEvent(event);
+
+			if (event.type == sf::Event::Closed)
+				scene.getWindow().close();
+
+			scene.processEvents(event);
+		}
+
+		sf::Time elapsed = clock.restart();
+		ImGui::SFML::Update(scene.getWindow(), elapsed);
+
+		showInfoOverlay(scene.getOverlayMessages());
+		scene.customImGui();
+
+		if (showImGuiDemo)
+			ImGui::ShowDemoWindow(&showImGuiDemo);
+
+		scene.getWindow().clear();
+
+		scene.update(elapsed);
+
+		scene.draw(elapsed);
+
+		ImGui::SFML::Render(scene.getWindow());
+		scene.getWindow().display();
+	}
+
+	ImGui::SFML::Shutdown();
+	std::cerr << "\n\nElapsed(ms)=" << since(start).count() << std::endl;*/
 	return EXIT_SUCCESS;
 }
 

@@ -12,10 +12,9 @@ protected:
 
 	sf::Text txtFps;
 	sf::Font font;
-	bool isFPS{ false };
-	
-	virtual void drawScene(float elapsed) = 0;
-	virtual void updateScene(float elapsed) = 0;
+		
+	virtual void drawScene(float elapsedRatio) = 0;
+	virtual void updateScene(sf::Time elapsed) = 0;
 	virtual void processSceneEvents(const sf::Event& event) = 0;	
 
 public:
@@ -43,21 +42,14 @@ public:
 		processSceneEvents(event);
 	}
 
-	void update(float elapsed)
+	void update(sf::Time elapsed)
 	{		
 		updateScene(elapsed);
 	}
 	
-	void draw(float elapsed)
+	void draw(float elapsedRatio)
 	{		
-		drawScene(elapsed);
-
-		if (isFPS)
-		{
-			float fps = 1.0f / elapsed;			
-			txtFps.setString(std::to_string((int)fps));
-			window.draw(txtFps);			
-		}
+		drawScene(elapsedRatio);
 	}
 	
 	sf::RenderWindow& getWindow()
